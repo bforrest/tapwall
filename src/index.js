@@ -1,7 +1,7 @@
 import './index.css';
 
 import {getUsers, deleteUser} from './api/userApi';
-
+import {getBeers } from './api/beerApi';
 // Populate table of users via API call.
 getUsers().then(result => {
   let usersBody = "";
@@ -23,6 +23,36 @@ getUsers().then(result => {
   // Must use array.from to create a real array from a DOM collection
   // getElementsByClassname only returns an "array like" object
   Array.from(deleteLinks, link => {
+    link.onclick = function(event) {
+      const element = event.target;
+      event.preventDefault();
+      deleteUser(element.attributes["data-id"].value);
+      const row = element.parentNode.parentNode;
+      row.parentNode.removeChild(row);
+    };
+  });
+});
+
+getBeers().then( result => {
+  let beerBody = "";
+
+  result.forEach(beer =>{
+    beerBody += `<tr>
+      <td><a href="#" data-id="${beer.id}" class="deleteBeer">Delete</a></td>
+      <td>${beer.brewer}</td>
+      <td>${beer.name}</td>
+      <td>${beer.description}</td>
+      <td>${beer.abv}</td>
+      <td>${beer.ibu}</td>
+    </tr>`;
+  })
+
+  global.document.getElementById('beers').innerHTML = beerBody;
+
+  const deleteBeerLinks = global.document.getElementsByClassName('deleteBeer');
+  // Must use array.from to create a real array from a DOM collection
+  // getElementsByClassname only returns an "array like" object
+  Array.from(deleteBeerLinks, link => {
     link.onclick = function(event) {
       const element = event.target;
       event.preventDefault();
