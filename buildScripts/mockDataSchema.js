@@ -28,7 +28,46 @@ export const schema = {
         },
         required: ['id', 'firstName', 'lastName', 'email']
       }
+    },
+    "beers":{
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "properties":{
+          "id":{
+            "type": "number",
+            "unique": true,
+            "minimum": 1
+          },
+          "brewer": {
+            "type": "string",
+            "faker": "company.companyName"
+          },
+          "name": {
+            "type": "string",
+            "faker": "commerce.productName"
+          },
+          "abv": {
+            "type": "number",
+            "minimum": 4,
+            "maximum": 18
+          },
+          "ibu": {
+            "type": "number",
+            "minimum": 4,
+            "maximum": 140
+          },
+          "description":{
+            "type": "string",
+            "faker": "lorem.paragraph"
+          }
+        },
+        required: ['id', 'brewer', 'name', 'abv', 'ibu', 'description']
+      }
     }
+
   },
-  required: ['users']
+  required: ['users', 'beers']
 };
