@@ -1,13 +1,12 @@
-import express from 'express';
-import path from 'path';
-import open from 'open';
-import compression from 'compression';
-import cors from 'cors';
+var express = require('express');
+var path = require('path');
+var  open = require('open');
+var  compression = require('compression');
+var  cors =require('cors');
 /*eslint-disable no-console */
 
 const port = 3000;
 const app = express();
-app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static('dist'));
 app.use(compression());
