@@ -1,64 +1,32 @@
 import './index.css';
 
-import {getUsers, deleteUser} from './api/userApi';
-import {getBeers } from './api/beerApi';
-// Populate table of users via API call.
-getUsers().then(result => {
-  let usersBody = "";
+import {getTaps } from './api/tapsApi';
 
-  result.forEach(user => {
-    usersBody+= `<tr>
-      <td><a href="#" data-id="${user.id}" class="deleteUser">Delete</a></td>
-      <td>${user.id}</td>
-      <td>${user.firstName}</td>
-      <td>${user.lastName}</td>
-      <td>${user.email}</td>
-      </tr>`
+let tapBody = "";
+
+//get taps list
+getTaps().then( result => {
+
+  result.forEach( tap => {
+    tapBody += `
+  <div class="medium-6 large-4 columns">
+      <article class="article-card">
+
+        <div class="card-content">
+
+          <h4>${tap.beer.name}</h4>
+
+          <p class="post-author">By <a href="#">${tap.beer.brewer}</a></p>
+
+          <p>${tap.beer.description}</p>
+          <p>
+            <a href="#">Stats:</a>
+            <a href="#" class="right">ABV ${tap.beer.abv}%</a>
+            <a href="#" class="right">IBU ${tap.beer.ibu}</a>
+          </p>
+        </div>
+      </article>
+    </div>`
   });
-
-  global.document.getElementById('users').innerHTML = usersBody;
-
-  const deleteLinks = global.document.getElementsByClassName('deleteUser');
-
-  // Must use array.from to create a real array from a DOM collection
-  // getElementsByClassname only returns an "array like" object
-  Array.from(deleteLinks, link => {
-    link.onclick = function(event) {
-      const element = event.target;
-      event.preventDefault();
-      deleteUser(element.attributes["data-id"].value);
-      const row = element.parentNode.parentNode;
-      row.parentNode.removeChild(row);
-    };
-  });
-});
-
-getBeers().then( result => {
-  let beerBody = "";
-
-  result.forEach(beer =>{
-    beerBody += `<tr>
-      <td><a href="#" data-id="${beer.id}" class="deleteBeer">Delete</a></td>
-      <td>${beer.brewer}</td>
-      <td>${beer.name}</td>
-      <td>${beer.description}</td>
-      <td>${beer.abv}</td>
-      <td>${beer.ibu}</td>
-    </tr>`;
-  })
-
-  global.document.getElementById('beers').innerHTML = beerBody;
-
-  const deleteBeerLinks = global.document.getElementsByClassName('deleteBeer');
-  // Must use array.from to create a real array from a DOM collection
-  // getElementsByClassname only returns an "array like" object
-  Array.from(deleteBeerLinks, link => {
-    link.onclick = function(event) {
-      const element = event.target;
-      event.preventDefault();
-      deleteUser(element.attributes["data-id"].value);
-      const row = element.parentNode.parentNode;
-      row.parentNode.removeChild(row);
-    };
-  });
+global.document.getElementById('taps').innerHTML = tapBody;
 });

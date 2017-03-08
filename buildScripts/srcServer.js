@@ -19,14 +19,6 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../src/index.html'));
 });
 
-app.get('/taps', function(req, res){
-  res.sendFile(path.join(__dirname, '../src/taps.html'));
-})
-
-// app.get('/beers', function(req, res){
-//   res.sendFile(path.join(__dirname, '../src'))
-// })
-
 app.get('/users', function(req, res) {
   // Hard coding for simplicity. Pretend this hits a real database
   res.json([

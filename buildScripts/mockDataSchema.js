@@ -1,42 +1,14 @@
 export const schema = {
   "type": "object",
   "properties": {
-    "users": {
-      "type": "array",
-      "minItems": 3,
-      "maxItems": 5,
-      "items": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number",
-            "unique": true,
-            "minimum": 1
-          },
-          "firstName": {
-            "type": "string",
-            "faker": "name.firstName"
-          },
-          "lastName": {
-            "type": "string",
-            "faker": "name.lastName"
-          },
-          "email": {
-            "type": "string",
-            "faker": "internet.email"
-          }
-        },
-        "required": ["id", "firstName", "lastName", "email"]
-      }
-    },
-     "taps": {
+    "taps":{
       "type": "array",
       "minItems": 3,
       "maxItems": 4,
-      "items": {
-        "type": "beer",
-        "$ref": "#/definitions/beer"
-        }
+      "items":{
+        "type": "tap",
+        "$ref": "#/definitions/tap"
+      }
     },
     "beers":{
       "type": "array",
@@ -49,6 +21,22 @@ export const schema = {
     }
   },
   "definitions":{
+    "tap":{
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "unique": true,
+          "minimum": 1,
+          "maximum": 4
+        },
+        "beer": {
+          "type": "beer",
+          "$ref": "#/definitions/beer"
+        }
+      },
+      "required": ["id", "beer"]
+    },
     "beer": {
       "type": "object",
       "properties":{
@@ -81,7 +69,7 @@ export const schema = {
         }
       },
       "required": ["id", "brewer", "name", "abv", "ibu", "description"]
-    }
-  },
-  "required": ["users", "taps", "beers"]
+    },
+    "required": ["users", "taps", "beers"]
   }
+}
