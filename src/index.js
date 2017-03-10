@@ -6,7 +6,16 @@ let tapBody = "";
 
 //get taps list
 getTaps().then( result => {
-
+if(!result){
+ tapBody += `
+ <div class="medium-6 large-4 columns">
+  <article class="article-card">
+    No data available
+  </article>
+</div>`
+  global.document.getElementById('taps').innerHTML = tapBody;
+  return;
+}
   result.forEach( tap => {
     tapBody += `
   <div class="medium-6 large-4 columns">
