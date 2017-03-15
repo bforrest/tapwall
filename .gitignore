@@ -44,3 +44,5 @@ dist
 
 #mock db
 db.json
+
+*.env
