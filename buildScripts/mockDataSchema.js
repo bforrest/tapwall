@@ -6,7 +6,6 @@ export const schema = {
       "minItems": 3,
       "maxItems": 4,
       "items":{
-        "type": "tap",
         "$ref": "#/definitions/tap"
       }
     },
@@ -15,7 +14,6 @@ export const schema = {
       "minItems": 3,
       "maxItems": 10,
       "items": {
-        "type": "beer",
         "$ref": "#/definitions/beer"
       }
     }
@@ -31,7 +29,6 @@ export const schema = {
           "maximum": 4
         },
         "beer": {
-          "type": "beer",
           "$ref": "#/definitions/beer"
         }
       },
