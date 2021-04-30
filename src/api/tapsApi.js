@@ -13,6 +13,7 @@ function get(url) {
 }
 
 // Can't call func delete since reserved word.
+/*
 function del(url) {
   const request = new Request(baseUrl + url, {
     method: 'DELETE'
@@ -20,7 +21,7 @@ function del(url) {
 
   return fetch(request).then(onSuccess, onError);
 }
-
+*/
 function onSuccess(response) {
   return response.json();
 }
