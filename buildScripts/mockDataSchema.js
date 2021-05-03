@@ -23,7 +23,7 @@ export const schema = {
       "type": "object",
       "properties": {
         "id": {
-          "type": "number",
+          "type": "integer",
           "unique": true,
           "minimum": 1,
           "maximum": 4
@@ -38,7 +38,7 @@ export const schema = {
       "type": "object",
       "properties":{
         "id":{
-          "type": "number",
+          "type": "integer",
           "unique": true,
           "minimum": 1
         },
@@ -51,18 +51,19 @@ export const schema = {
           "faker": "commerce.productName"
         },
         "abv": {
-          "type": "number",
-          "minimum": 4,
-          "maximum": 18
+          "type": "string",
+          "faker": {
+            "finance.amount": [3,18,1]
+          }
         },
         "ibu": {
-          "type": "number",
+          "type": "integer",
           "minimum": 4,
           "maximum": 140
         },
         "description":{
           "type": "string",
-          "faker": "lorem.paragraph"
+          "faker": "commerce.productDescription"
         }
       },
       "required": ["id", "brewer", "name", "abv", "ibu", "description"]
