@@ -4,15 +4,16 @@ export const schema = {
     "taps":{
       "type": "array",
       "minItems": 3,
-      "maxItems": 4,
+      "maxItems": 10,
       "items":{
-        "$ref": "#/definitions/tap"
+        "$ref": "#/definitions/tap",
+        "unique": true
       }
     },
     "beers":{
       "type": "array",
       "minItems": 3,
-      "maxItems": 10,
+      "maxItems": 50,
       "items": {
         "$ref": "#/definitions/beer"
       }
@@ -26,7 +27,11 @@ export const schema = {
           "type": "integer",
           "unique": true,
           "minimum": 1,
-          "maximum": 4
+          "maximum": 100
+        },
+        "name": {
+          "type": "string",
+          "faker" : "lorem.word"
         },
         "beer": {
           "$ref": "#/definitions/beer"
@@ -40,7 +45,8 @@ export const schema = {
         "id":{
           "type": "integer",
           "unique": true,
-          "minimum": 1
+          "minimum": 1,
+          "maximum": 300
         },
         "brewer": {
           "type": "string",
@@ -68,6 +74,6 @@ export const schema = {
       },
       "required": ["id", "brewer", "name", "abv", "ibu", "description"]
     },
-    "required": ["users", "taps", "beers"]
+    "required": ["taps", "beers"]
   }
 }
